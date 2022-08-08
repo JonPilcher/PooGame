@@ -240,23 +240,7 @@ Graphics::Graphics( HWNDKey& key )
 		_aligned_malloc( sizeof( Color ) * Graphics::ScreenWidth * Graphics::ScreenHeight,16u ) );
 }
 
-void Graphics::DrawCircle(int x, int y, int radius, Color c)
-{
 
-	const int rad_sq = radius * radius;
-	for (int y_loop = y - radius; y_loop < y + radius + 1; ++y_loop)
-	{
-		for (int x_loop = x - radius; x_loop < x + radius + 1; ++x_loop)
-		{
-			const int x_diff = x - x_loop;
-			const int y_diff = y - y_loop;
-			if (x_diff * x_diff + y_diff * y_diff <= rad_sq)
-			{
-				PutPixel(x_loop, y_loop, c);
-			}
-		}
-	}
-}
 
 Graphics::~Graphics()
 {
@@ -350,6 +334,24 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 		for( int x = x0; x < x1; ++x )
 		{
 			PutPixel( x,y,c );
+		}
+	}
+}
+
+void Graphics::DrawCircle(int x, int y, int radius, Color c)
+{
+
+	const int rad_sq = radius * radius;
+	for (int y_loop = y - radius; y_loop < y + radius + 1; ++y_loop)
+	{
+		for (int x_loop = x - radius; x_loop < x + radius + 1; ++x_loop)
+		{
+			const int x_diff = x - x_loop;
+			const int y_diff = y - y_loop;
+			if (x_diff * x_diff + y_diff * y_diff <= rad_sq)
+			{
+				PutPixel(x_loop, y_loop, c);
+			}
 		}
 	}
 }
