@@ -348,7 +348,7 @@ void Dude::Draw( Graphics& gfx ) const
 	gfx.PutPixel( 12 + x_int,19 + y_int,0,0,0 );
 }
 
-void Dude::Update( const Keyboard & kbd,float dt )
+void Dude::UpdateKBD( const Keyboard & kbd,float dt )
 {
 	if( kbd.KeyIsPressed( VK_RIGHT ) )
 	{
@@ -365,6 +365,37 @@ void Dude::Update( const Keyboard & kbd,float dt )
 	if( kbd.KeyIsPressed( VK_UP ) )
 	{
 		pos.y -= speed * dt;
+	}
+	if (kbd.KeyIsPressed(VK_SPACE))
+	{
+		speed = 3.0f * 60.0f;
+	}
+	else
+	{
+		speed = 2.0f * 60.0f;
+	}
+}
+
+void Dude::UpdateMouse(const Mouse& mouse, float dt)
+{
+	if (mouse.LeftIsPressed())
+	{
+		if (mouse.GetPosX() < pos.x)
+		{
+			pos.x -= speed * dt;
+		}
+		if (mouse.GetPosX() > pos.x)
+		{
+			pos.x += speed * dt;
+		}
+		if (mouse.GetPosY() < pos.y)
+		{
+			pos.y -= speed * dt;
+		}
+		if (mouse.GetPosY() > pos.y)
+		{
+			pos.y += speed * dt;
+		}
 	}
 }
 
