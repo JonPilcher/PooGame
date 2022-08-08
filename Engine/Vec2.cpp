@@ -48,7 +48,7 @@ float Vec2::GetLengthSq() const
 	return x * x + y * y;
 }
 
-Vec2* Vec2::Normalize()
+Vec2& Vec2::Normalize()
 {
 	return *this = GetNormalized();
 }
