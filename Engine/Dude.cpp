@@ -350,21 +350,22 @@ void Dude::Draw( Graphics& gfx ) const
 
 void Dude::UpdateKBD( const Keyboard & kbd,float dt )
 {
-	if( kbd.KeyIsPressed( VK_RIGHT ) )
+	Vec2 val(0.0f, 0.0f);
+	if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		pos.x += speed * dt;
+		val.x += 1.0f;
 	}
-	if( kbd.KeyIsPressed( VK_LEFT ) )
+	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		pos.x -= speed * dt;
+		val.x -= 1.0f;
 	}
 	if( kbd.KeyIsPressed( VK_DOWN ) )
 	{
-		pos.y += speed * dt;
+		val.y += 1.0f;
 	}
 	if( kbd.KeyIsPressed( VK_UP ) )
 	{
-		pos.y -= speed * dt;
+		val.y -= 1.0f;
 	}
 	if (kbd.KeyIsPressed(VK_SPACE))
 	{
@@ -374,28 +375,16 @@ void Dude::UpdateKBD( const Keyboard & kbd,float dt )
 	{
 		speed = 2.0f * 60.0f;
 	}
+	pos += val.GetNormalized() * speed * dt;
 }
 
 void Dude::UpdateMouse(const Mouse& mouse, float dt)
 {
 	if (mouse.LeftIsPressed())
 	{
-		if (mouse.GetPosX() < pos.x)
-		{
-			pos.x -= speed * dt;
-		}
-		if (mouse.GetPosX() > pos.x)
-		{
-			pos.x += speed * dt;
-		}
-		if (mouse.GetPosY() < pos.y)
-		{
-			pos.y -= speed * dt;
-		}
-		if (mouse.GetPosY() > pos.y)
-		{
-			pos.y += speed * dt;
-		}
+		const Vec2 center = pos + Vec2(float(width) / 2.0f, float(height) / 2.0f);
+		const Vec2 toMPointer = Vec2(float(mouse.GetPosX() ), float(mouse.GetPosY() ) ) - center;
+		pos += toMPointer.GetNormalized() * speed * dt;
 	}
 }
 
