@@ -384,7 +384,10 @@ void Dude::UpdateMouse(const Mouse& mouse, float dt)
 	{
 		const Vec2 center = pos + Vec2(float(width) / 2.0f, float(height) / 2.0f);
 		const Vec2 toMPointer = Vec2(float(mouse.GetPosX() ), float(mouse.GetPosY() ) ) - center;
-		pos += toMPointer.GetNormalized() * speed * dt;
+		if (toMPointer.GetLengthSq() > speed * dt)
+		{
+			pos += toMPointer.GetNormalized() * speed * dt;
+		}
 	}
 }
 
