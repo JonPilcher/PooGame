@@ -369,7 +369,7 @@ void Dude::UpdateKBD( const Keyboard & kbd,float dt )
 	}
 	if (kbd.KeyIsPressed(VK_SPACE))
 	{
-		speed = 3.0f * 60.0f;
+		speed = 4.0f * 60.0f;
 	}
 	else
 	{
